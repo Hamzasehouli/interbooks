@@ -1,0 +1,38 @@
+{
+  "name": "logistix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "set NODE_ENV=development && nodemon server.js",
+    "start:prod": "set NODE_ENV=production && nodemon server.js"
+  },
+  "author": "Hamza Sehouli",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.4.7",
+    "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-rate-limit": "^5.4.0",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.9",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.6.5",
+    "nodemailer-sendgrid": "^1.0.3",
+    "pug": "^3.0.2",
+    "slugify": "^1.6.0",
+    "xss-clean": "^0.1.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-security": "^1.4.0"
+  }
+}

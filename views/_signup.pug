@@ -1,0 +1,49 @@
+extends base
+
+block content
+    section.signup
+        form.signupForm.form
+            h2(style='margin-bottom: 3rem') Signup
+            .form__entity
+                label.form__label(for='gender')  Gender
+                div
+                    input#male.gender(required checked value="male" type='radio' name="gender")
+                    label(for='male') Male
+                div
+                    input#female.gender(required value="female" type='radio' name="gender")
+                    label(for='female') Female
+            .form__entity
+                label.form__label(for='firstName')  Firt name
+                input#firstName.form__input(required='' type='text')
+            .form__entity
+                label.form__label(for='lastName')  Lastname
+                input#lastName.form__input(required='' type='text')
+            .form__entity
+                label.form__label(for='userName')  Username
+                input#userName.form__input(required='' type='text')
+            .form__entity
+                label.form__label(for='email')  Email
+                input#email.form__input(required='' type='email')
+            .form__entity
+                label.form__label(for='password')  Password
+                input#password.form__input(required='' type='password')
+            .form__entity
+                label.form__label(for='confirmPassword')
+                    | Confirm password
+                input#confirmPassword.form__input(required='' type='password')
+            .form__entity
+                .terms
+                    input#policy(required type='checkbox')
+                    label(for='policy')
+                        | Agree our 
+                        a(href='') Privacy Policy
+                        |  and
+                        a(href='#') Terms &amp; Conditions.
+            .form__entity
+                .terms
+                    input#newsletter(checked type='checkbox')
+                    label(for='newsletter') Accept newsletter
+            button(type='submit') Sign up
+            div
+                span(style='margin-right: 0.5rem') Already have an account ?
+                a(href='/login')  Log in here

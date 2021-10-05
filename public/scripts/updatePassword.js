@@ -1,0 +1,56 @@
+'use strict';
+
+import addAlert from './addAlert.js';
+import { addSpinner, removeSpinner } from './spinner.js';
+
+const currentPassword = document.getElementById('currentPassword');
+const newPassword = document.getElementById('newPassword');
+const confirmNewPassword = document.getElementById('confirmNewPassword');
+
+export default document
+  .querySelector('.update-password-form')
+  ?.addEventListener('submit', async function (e) {
+    try {
+      e.preventDefault();
+
+      const obj = {
+        currentPassword: currentPassword.value,
+        newPassword: newPassword.value,
+        confirmNewPassword: confirmNewPassword.value,
+      };
+      console.log(obj);
+      addSpinner(this);
+      const res = await fetch(
+        `http://127.0.0.1:3000/api/v1/users/change-password`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/JSON',
+          },
+          body: JSON.stringify(obj),
+        }
+      );
+
+      removeSpinner(this);
+
+      const data = await res.json();
+      if (!res.ok) {
+        addAlert('error', data.error);
+        setTimeout(() => {
+          document.querySelector('.alert').style.display = 'none';
+        }, 3000);
+      } else {
+        addAlert('success', 'Your profile has been updated successfully ');
+        setTimeout(() => {
+          document.querySelector('.alert').style.display = 'none';
+          //   window.location.replace('/profile');
+        }, 3000);
+      }
+
+      currentPassword.value = '';
+      newPassword.value = '';
+      confirmNewPassword.value = '';
+    } catch (err) {
+      console.log(err);
+    }
+  });

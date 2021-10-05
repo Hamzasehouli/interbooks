@@ -1,0 +1,17 @@
+extends base
+
+block content
+    section.signup.login-form
+        form.form
+            h2(style='margin-bottom: 3rem') Login
+            .form__entity
+                label.form__label(for='email')  Email
+                input#email.form__input(required='' type='email')
+            .form__entity
+                label.form__label(for='password')  Password
+                input#password.form__input(required='' type='password')
+            a(href='/forget-password') Forget your password?
+            button(type='submit') Log in
+            div
+                span(style='margin-right: 0.5rem') Don&apos;t have an account ?
+                a(href='/signup')  Create one here

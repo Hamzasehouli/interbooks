@@ -1,0 +1,45 @@
+extends base
+
+block content 
+    section.section-cart
+        .container
+            h2 Shopping cart
+            .cart
+                ul.cart__list
+                    li.cart__item
+                        figure.cart__item__img
+                            img(src='https://m.media-amazon.com/images/I/51P06+ZXMTL._AC_AA360_.jpg' alt='')
+                        .cart__item__details
+                            h3 Unscripted - The Great Rat-Race Escape.
+                            div
+                            | by 
+                            a(href='/atuhor') Mj Demarco
+                            p(style='font-size: 1.4rem; font-weight: 700') Paperback
+                            p(style='color: green') In Stock
+                            p(style='color: var(--color-secondary)') Quantity 1
+                            .cta
+                            button Increase
+                            button Delete
+                            button Save for later
+                        .cart__item__price MAD 200
+                    li.cart__item
+                        figure.cart__item__img
+                            img(src='https://m.media-amazon.com/images/I/51P06+ZXMTL._AC_AA360_.jpg' alt='')
+                        .cart__item__details
+                            h3 Unscripted - The Great Rat-Race Escape.
+                            div
+                            | by 
+                            a(href='/atuhor') Mj Demarco
+                            p(style='font-size: 1.4rem; font-weight: 700') Paperback
+                            p(style='color: green') In Stock
+                            p(style='color: var(--color-secondary)') Quantity 1
+                            .cta
+                            button Increase
+                            button Delete
+                            button Save for later
+                        .cart__item__price MAD 200
+                   
+                .cart__checkout
+                    p Total of items(1):
+                        span(style='font-weight: 700')  MAD 200
+                    a.cart__checkout__btn.btn--cta(href='#') Proceed to checkout

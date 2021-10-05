@@ -1,0 +1,60 @@
+extends base
+
+block content 
+    section.section-hero
+        .container.hero
+            .info
+                h3 Books
+                h1 Discover our new releases
+                p Discover our hottest books collections
+                a.btn.btn--cta(href='#') Browse Categories
+            figure
+                img(src='/images/books.jpg' alt='hero books image')
+    section.section-trending
+        .container
+            h2 Trending books
+            ul.list
+                each i in [1,2,3,4,5,6]
+                    li.item
+                        span.like(type='button')
+                            svg
+                                use(href='/sprite.svg#icon-heart')
+                        a(href='#')
+                            img.img(src='images/books/the-millionaire-fastlane.jpg')
+                        a(href='#')
+                            h3 Trump the arte of the deal
+                        p.format Paperback
+                        p.author Trump
+                        p.state Used
+                        p.price 200 MAD
+                        button.btn.btn--flat Add to cart
+
+
+    section.section-categories
+        .container
+            h2 Categories
+            .grid-container
+                a.grid-unit.first(href='')
+                    img(src='/images/self.jpg' alt='')
+                    span Self-development
+                a.grid-unit.second(href='')
+                    img(src='/images/fiction.jpg' alt='')
+                    span Fiction
+                a.grid-unit.third(href='')
+                    img(src='/images/cook.jpg' alt='')
+                    span Cook books
+                a.grid-unit.fourth(href='')
+                    img(src='/images/thriller.jpg' alt='')
+                    span Thrillers
+                a.grid-unit.fifth(href='')
+                    img(src='/images/teens.jpg' alt='')
+                    span Teen books
+                a.grid-unit.sixth(href='')
+                    img(src='/images/manga.jpg' alt='')
+                    span Manga
+                a.grid-unit.seventh(href='')
+                    img(src='/images/real.jpg' alt='')
+                    span Non-fiction
+                a.grid-unit.eigth(href='')
+                    img(src='/images/bio.jpg' alt='')
+                    span Biography
