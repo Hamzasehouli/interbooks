@@ -885,16 +885,16 @@ a {
 }
 
 :root {
-  --color-primary-light: #58586b;
-  --color-primary: #58586b;
-  --color-primary-dark: #58586b;
-  --color-secondary-light: #ffc166;
-  --color-secondary: #ff9800;
-  --color-secondary-dark: #aa6500;
-  --color-dark: #58586b;
-  --color-light: #e5e4e2;
-  --color-error: #ff0800;
-  --color-ok: #00ff40;
+  --color-primary-light: #23231a;
+  --color-primary: #23231a;
+  --color-primary-dark: #23231a;
+  --color-secondary-light: #75c9c8;
+  --color-secondary: #75c9c8;
+  --color-secondary-dark: #399391;
+  --color-dark: #23231a;
+  --color-light: #e2f4f3;
+  --color-error: #e43f6f;
+  --color-ok: #59ffa0;
 }
 
 .loader {
