@@ -17,11 +17,11 @@ block content
                             a.profile__link(href='#') Wishlist
                 .profile__infos
                     .figure
-                        img(src='/images/users/hamza-sehouli.jpg' alt='')
+                        img(src='/images/users/user-default.png' alt='')
                         button.btn--cta(style='margin-bottom: 2rem; padding: 0.5rem 1.5rem' type='button')
                             | Update photo
                         h2 #{user.firstName} #{user.lastName}
-                    form
+                    form.update-data-form
                         h2 Update data
                         .form__entity
                             label.form__label(for='firstName') First name
@@ -36,7 +36,7 @@ block content
                             label.form__label(for='email') Email
                             input#email.form__input(type='email' placeholder=`${user.email}`)
                         button.btn--cta(type='submit') Confirm
-                    form
+                    form.update-password-form
                         h2 Update password
                         .form__entity
                             label.form__label(for='currentPassword') current password
