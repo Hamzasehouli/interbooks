@@ -9,9 +9,9 @@ const cartSchema = mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Book',
   },
-  quantity: {
-    type: Number,
-    default: 1,
+  addedAt: {
+    type: Date,
+    default: Date.now(),
   },
 });
 

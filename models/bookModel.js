@@ -10,7 +10,7 @@ const bookSchema = mongoose.Schema(
     },
     title: {
       type: String,
-      required: [true, 'Please add book title'],
+      // // required: [true, 'Please add book title'],
     },
     slug: {
       type: String,

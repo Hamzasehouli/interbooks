@@ -2,59 +2,63 @@ extends base
 
 block content 
     section.section-hero
-        .container.hero
+        .hero
             .info
                 h3 Books
                 h1 Discover our new releases
-                p Discover our hottest books collections
-                a.btn.btn--cta(href='#') Browse Categories
+                p Get our hottest books deals
+                button.btn.btn--cta#browse-category(type="button" style="padding:1rem;") Browse Categories
             figure
-                img(src='/images/books.jpg' alt='hero books image')
+                //- img(src='/images/books.jpg' alt='hero books image')
+
     section.section-trending
         .container
             h2 Trending books
             ul.list
-                each i in [1,2,3,4,5,6]
+                each book in books
                     li.item
-                        span.like(type='button')
-                            svg
-                                use(href='/sprite.svg#icon-heart')
-                        a(href='#')
-                            img.img(src='images/books/the-millionaire-fastlane.jpg')
-                        a(href='#')
-                            h3 Trump the arte of the deal
-                        p.format Paperback
-                        p.author Trump
-                        p.state Used
-                        p.price 200 MAD
-                        button.btn.btn--flat Add to cart
+                        if user
+                            span.like.overviewLike(type='button' data-user=`${user.id}` data-book=`${book.id}`)
+                                svg
+                                    use(href='/sprite.svg#icon-heart')
+                        a(href=`/book/${book.slug}`)
+                            img.img(src=`${book.coverImage}`)
+                        a(href=`/book/${book.slug}`)
+                            h3=`${book.name.includes('-') ? book.name.split('-').join(' ').toUpperCase() : book.name.toUpperCase()}`
+                        p.format= `${book.format.toUpperCase()}`
+                         
+                        a.author(style="textDecoration:none;color:black")(href=`/author/${book.author}`)= `${book.author.map(a=> a.includes('-') ? a.split('-').join(' ').toUpperCase() : a.toUpperCase()).join(', ')}`
+                        p.state= book.status
+                        p.price MAD #{book.price} 
+                        if user
+                            button.btn.btn--flat.addToCart(data-user=`${user.id}` data-book=`${book.id}`)  Add to cart
 
 
-    section.section-categories
+    section.section-categories#section-categories
         .container
             h2 Categories
             .grid-container
-                a.grid-unit.first(href='')
+                a.grid-unit.first(href='/category/self-development')
                     img(src='/images/self.jpg' alt='')
                     span Self-development
-                a.grid-unit.second(href='')
+                a.grid-unit.second(href='/category/fiction')
                     img(src='/images/fiction.jpg' alt='')
                     span Fiction
-                a.grid-unit.third(href='')
+                a.grid-unit.third(href='/category/cook')
                     img(src='/images/cook.jpg' alt='')
                     span Cook books
-                a.grid-unit.fourth(href='')
+                a.grid-unit.fourth(href='/category/thriller')
                     img(src='/images/thriller.jpg' alt='')
                     span Thrillers
-                a.grid-unit.fifth(href='')
+                a.grid-unit.fifth(href='/category/teens')
                     img(src='/images/teens.jpg' alt='')
                     span Teen books
-                a.grid-unit.sixth(href='')
+                a.grid-unit.sixth(href='/category/manga')
                     img(src='/images/manga.jpg' alt='')
                     span Manga
-                a.grid-unit.seventh(href='')
+                a.grid-unit.seventh(href='/category/non-fiction')
                     img(src='/images/real.jpg' alt='')
                     span Non-fiction
-                a.grid-unit.eigth(href='')
+                a.grid-unit.eigth(href='/category/biography')
                     img(src='/images/bio.jpg' alt='')
                     span Biography

@@ -1,21 +1,21 @@
 const express = require('express');
 
-const reviewControllers = require('../controllers/reviewControllers');
+const cartControllers = require('../controllers/cartControllers');
 const authControllers = require('../controllers/authControllers');
 
-const router = express.Router({ mergeParams: true });
+const router = express.Router();
 
 router.use(authControllers.isLoggedIn);
 // router.use(authControllers.protect('admin'));
 
 router
   .route('/')
-  .post(reviewControllers.createReview)
-  .get(reviewControllers.getReviews);
+  .post(cartControllers.createCart)
+  .get(cartControllers.getCarts);
 
 router
   .route('/:reviewId')
-  .patch(reviewControllers.updateReview)
-  .delete(reviewControllers.deleteReview);
+  .patch(cartControllers.updateCart)
+  .delete(cartControllers.deleteCart);
 
 module.exports = router;

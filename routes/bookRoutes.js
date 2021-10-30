@@ -19,4 +19,6 @@ router
   .get(bookControllers.getBooks)
   .post(bookControllers.createBook);
 
+router.route('/delete-all-books').delete(bookControllers.deleteAllBooks);
+
 module.exports = router;

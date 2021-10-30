@@ -20,23 +20,23 @@ block content
                         img(src='/images/users/hamza-sehouli.jpg' alt='')
                         button.btn--cta(style='margin-bottom: 2rem; padding: 0.5rem 1.5rem' type='button')
                             | Update photo
-                        h2= `${user.firstName} ${user.lastName}`
-                    form.update-data-form
+                        h2 #{user.firstName} #{user.lastName}
+                    form
                         h2 Update data
                         .form__entity
                             label.form__label(for='firstName') First name
-                            input#firstName.form__input(type='text' value=`${user.firstName}`)
+                            input#firstName.form__input(type='text' placeholder=`${user.firstName}`)
                         .form__entity
                             label.form__label(for='lastName') Last name
-                            input#lastName.form__input(type='text' value=`${user.lastName}`)
+                            input#lastName.form__input(type='text' placeholder=`${user.lastName}`)
                         .form__entity
                             label.form__label(for='userName') User name
-                            input#userName.form__input(type='text' value=`${user.userName}`)
+                            input#userName.form__input(type='text' placeholder=`${user.userName}`)
                         .form__entity
                             label.form__label(for='email') Email
-                            input#email.form__input(type='email' value=`${user.email}`)
+                            input#email.form__input(type='email' placeholder=`${user.email}`)
                         button.btn--cta(type='submit') Confirm
-                    form.update-password-form
+                    form
                         h2 Update password
                         .form__entity
                             label.form__label(for='currentPassword') current password
@@ -48,3 +48,4 @@ block content
                             label.form__label(for='confirmNewPassword') confirm new password
                             input#confirmNewPassword.form__input(type='password')
                         button(type='submit') Confirm
+

@@ -8,25 +8,30 @@ footer.footer
     ul.footer__list
         li.footer__item
             a(href='/')
-                img(src='/images/favicon.png')
+                img(src='/images/logo-white.png')
             p Av Mly Youssef N&deg;33, 90050 Tangier, Morocco
         li.footer__item
+            
             h3 Shop
-            a.footer__link.btn--standard(href='#') Browse collection
-            a.footer__link.btn--standard(href='#') Cart
-            a.footer__link.btn--standard(href='#') Wshlist
+            a.footer__link.btn--standard(href='#') Help
+            //- a.footer__link.btn--standard(href='#') Browse collection
+            if user
+                a.footer__link.btn--standard(href='/cart') Cart
+                a.footer__link.btn--standard(href='/wishlist') Wshlist
         li.footer__item
             h3 About us
             a.footer__link.btn--standard(href='#') About Interbooks
-            a.footer__link.btn--standard(href='#') Help
+            
             a.footer__link.btn--standard(href='#') Contact us
             a.footer__link.btn--standard(href='#') Privacy policy
             a.footer__link.btn--standard(href='#') Return policy
         li.footer__item
             h3 Account
-            a.footer__link.btn--standard(href='#') Log in
-            a.footer__link.btn--standard(href='#') Sign up
-            a.footer__link.btn--standard(href='#') Account
+            if !user
+                a.footer__link.btn--standard(href='/login') Log in
+                a.footer__link.btn--standard(href='/signup') Sign up
+            else 
+                a.footer__link.btn--standard(href='/profile') Profile
     .sub-footer
         .copy All rights reserved. &copy; 2021-Interbooks
         .socials

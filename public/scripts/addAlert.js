@@ -3,7 +3,7 @@ elementDiv.classList.add('alert');
 export default function (state, message) {
   elementDiv.style.background =
     state === 'success' ? 'var(--color-ok)' : 'var(--color-error)';
-  elementDiv.style.position = 'absolute';
+  elementDiv.style.position = 'fixed';
   elementDiv.style.top = '50%';
   elementDiv.style.left = '50%';
   elementDiv.style.textAlign = 'center';

@@ -134,6 +134,12 @@ const lowercaseNames = function (prop) {
   return prop.toLowerCase()[0].toUpperCase() + prop.toLowerCase().slice(1);
 };
 
+userSchema.virtual('cart', {
+  ref: 'Cart',
+  foreignField: 'user',
+  localField: '_id',
+});
+
 userSchema.pre('save', async function (next) {
   this.firstName = lowercaseNames(this.firstName);
   this.lastName = lowercaseNames(this.lastName);

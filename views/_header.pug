@@ -1,24 +1,41 @@
+//- ul.cached__list.hidden
+//-   span.close X
+//-   li.nav__items
+//-     a.nav__link.btn--flat(href='/login') Log in
+//-   li.nav__items
+//-     a.nav__link.btn--flat(href='/signup') Signup
+//-   li.nav__items
+//-     a.nav__link.btn--flat(href='/wishlist') Wishlistiiiiii
+//-   li.nav__items
+//-     a.nav__link.btn--flat(href='/cart') Cart
+//-   li.nav__items
+//-     a.nav__link.btn--flat(href='/profile') Profile
+
+
 header.header
     nav.nav
         a.logo-link(href='/')
-            img.logo(src='/images/logo-orange.png' alt='interbook blue logo')
+            img.logo(src='/images/logo-blue.png' alt='interbook blue logo')
         form.nav__form
-            input.nav__form__input(type='text' placeholder='Search by Title, Authour, ISBN')
+            input.nav__form__input(type='text' placeholder='Search by Title, Author, ISBN')
             button.nav__form__button(type='submit')
                 svg.nav__form__icon
                     use(href='/sprite.svg#icon-search')
         ul.nav__list
             if !user
                 li.nav__items
-                    a.nav__link.btn--standard(href='/login') Log in
+                    a.nav__link.btn--outline(href='/login') Log in
                 li.nav__items
-                    a.nav__link.btn--standard(href='/signup') Signup
-            li.nav__items
-                a.nav__link.btn--standard(href='/wishlist') Wishlist
-            li.nav__items
-                a.nav__link.btn--standard(href='/cart') Cart
-            if user
+                    a.nav__link.btn--outline(href='/signup') Signup
+            if user        
                 li.nav__items
-                    a.nav__link.btn--standard(href='/profile') Profile
-                
-                
+                    a.nav__link.btn--outline(href='/wishlist') Wishlist
+                li.nav__items
+                    a.nav__link.btn--outline(href='/cart') Cart
+             
+                li.nav__items
+                    a.nav__link.btn--outline(href='/profile') Profile
+                li.nav__items
+                    button.nav__link.btn--outline.logout Log out
+        button.nav__button(type='button')
+            span.hamburger

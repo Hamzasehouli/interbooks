@@ -1,16 +1,16 @@
 extends base
 
-block content
-    section.section-author
+block content 
+    section.section-wishlist
         .container
-            figure.auth__details
-                img.auth__img(style='objectFit:cover;' src=`/images/authors/${author.name}.jpg` alt=`${author.name}photo`)
-                h2 Mj Demarco
-                p.auth__about
-                    | Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor corporis inventore magnam sit aliquam suscipit tempora ipsam, dolores, neque ipsum atque eos natus veniam hic error asperiores culpa adipisci.
+             
+            if books && books.length > 0 
+                h2 Results of your search
+            else
+                h2 No results found 
             ul.list
-                if author.books && author.books.length > 0  
-                    each book in author.books
+                if books && books.length > 0  
+                    each book in books
                         li.item
                             if user
                                 span.like.overviewLike(type='button' data-user=`${user?user.id:''}` data-book=`${book?book.id:''}`)
@@ -26,3 +26,5 @@ block content
                             p.price MAD #{book.price}
                             if user
                                 button.btn.btn--flat.addToCart(data-user=`${user ? user.id:''}` data-book=`${book ? book.id : ''}`) Add to cart
+                    
+                

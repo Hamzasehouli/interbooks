@@ -3,18 +3,23 @@ extends base
 block content 
     section.section-wishlist
         .container
-            h2 My wishlist
+            if books.length > 0
+                h2 My wishlist
+            else 
+                h2 Wishlist is empty
             ul.list
-                li.item
-                    span.like(type='button')
-                        svg
-                            use(href='/sprite.svg#icon-heart')
-                    a(href='#')
-                    img.img(src='images/books/trump.jpg')
-                    a(href='#')
-                    h3 Trump the arte of the deal
-                    p.format Paperback
-                    p.author Trump
-                    p.state Used
-                    p.price 200 MAD
-                    button.btn.btn--flat Add to cart
+                each book in books
+                    if book
+                        li.item
+                            span.like.deleteWishlist(type='button' data-user=`${user.id}` data-book=`${book.id}`) 
+                                svg
+                                    use(href='/sprite.svg#icon-bin')
+                            a(href=`/book/${book.slug}`)
+                                img.img(src=`${book.coverImage}`)
+                            a(href=`/book/${book.slug}`)
+                                h3= book.name
+                            p.format= book.format
+                            p.author= `${book.author.join(', ')}`
+                            p.state Used
+                            p.price #{book.price} MAD
+                            button.btn.btn--flat.addToCart(data-user=`${user.id}` data-book=`${book.id}`)  Add to cart      

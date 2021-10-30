@@ -6,7 +6,7 @@ exports.getCarts = AsyncHandler(async function (req, res, next) {
   if (req.params.cartId) {
     obj.cart = req.params.cartId;
   }
-  const carts = await Cart.find(obj);
+  const carts = await Cart.find(obj).populate('book');
   obj = {};
   res.status(200).json({
     status: 'success',
@@ -19,9 +19,7 @@ exports.getCarts = AsyncHandler(async function (req, res, next) {
 
 exports.createCart = AsyncHandler(async function (req, res, next) {
   const obj = {
-    rating: req.body.rating,
-    description: req.body.description,
-    book: req.params.bookId,
+    book: req.body.book,
     user: req.body.user,
   };
   const cart = await Cart.create(obj);

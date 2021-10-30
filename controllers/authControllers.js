@@ -103,7 +103,11 @@ exports.login = AsyncHandler(async function (req, res, next) {
 });
 
 exports.isLoggedIn = AsyncHandler(async function (req, res, next) {
-  const token = req.headers.cookie.split('=')[1];
+  const token = req.cookies.jwt
+    ? req.cookies.jwt
+    : req.headers.cookie?.split('=')[1]
+    ? ''
+    : '';
 
   jwt.verify(token, process.env.JWT_SECRET_KEY, async function (err, decoded) {
     if (!decoded || err) {
@@ -121,7 +125,7 @@ exports.isLoggedIn = AsyncHandler(async function (req, res, next) {
       );
     }
 
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.id).populate('cart');
 
     if (!user) {
       return next(
@@ -450,6 +454,61 @@ exports.getUserForView = AsyncHandler(async (req, res, next) => {
     // }
 
     req.user = user;
+    next();
+  });
+});
+
+exports.checkUser = AsyncHandler(async function (req, res, next) {
+  const token = req.cookies.jwt
+    ? req.cookies.jwt
+    : req.headers.cookie?.split('=')[1]
+    ? ''
+    : '';
+
+  jwt.verify(token, process.env.JWT_SECRET_KEY, async function (err, decoded) {
+    if (!decoded || err) {
+      // return next(
+      //   new ErrorHandler(403, 'You are not logged in, please login to continue')
+      // );
+      return next();
+    }
+
+    if (decoded.exp < Date.now() / 1000) {
+      // return next(
+      //   new ErrorHandler(
+      //     403,
+      //     'The login session has expired, please loginn again'
+      //   )
+      // );
+      return next();
+    }
+
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      // return next(
+      //   new ErrorHandler(
+      //     404,
+      //     'The account has been deactivated or no longer exists'
+      //   )
+      // );
+      next();
+    }
+
+    const passwordModifiedAt =
+      new Date(user.passwordModifiedAt).getTime() / 1000;
+
+    if (decoded.iat < passwordModifiedAt) {
+      // return next(
+      //   new ErrorHandler(
+      //     400,
+      //     'The login session has expired, please loginn again'
+      //   )
+      // );
+      return next();
+    }
+    res.locals.user = user;
+    // req.user = user;
     next();
   });
 });

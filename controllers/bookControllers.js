@@ -2,7 +2,7 @@ const AsyncHandler = require('../utilities/AsyncHandler.js');
 const Book = require('../models/bookModel.js');
 
 exports.getBooks = AsyncHandler(async function (req, res, next) {
-  const books = await User.find();
+  const books = await Book.find();
   res.status(200).json({
     status: 'success',
     results: books.length,
@@ -32,9 +32,16 @@ exports.updateBook = AsyncHandler(async function (req, res, next) {
 });
 
 exports.deleteBook = AsyncHandler(async function (req, res, next) {
-  await Boook.findByIdAndDelete();
+  await Book.findByIdAndDelete();
   res.status(204).json({
     status: 'success',
     message: 'Book is deleted successfully',
+  });
+});
+exports.deleteAllBooks = AsyncHandler(async function (req, res, next) {
+  await Book.deleteMany();
+  res.status(204).json({
+    status: 'success',
+    message: 'Books are deleted successfully',
   });
 });

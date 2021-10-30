@@ -7,11 +7,25 @@ html(lang="en")
         link( rel="stylesheet" href="/css/style.css")
         link( type="image/png" rel="shortcut icon" href="/images/favicon.png")
         title Document
-       
-        
+
+
         script(type="module" defer src="/scripts/main.js") 
     body 
-        
+        ul.cached__list.hidden
+            span.close X
+            if !user
+                li.nav__items
+                    a.nav__link.btn--flat(href='/login') Log in
+                li.nav__items
+                    a.nav__link.btn--flat(href='/signup') Signup
+            if user        
+                li.nav__items
+                    a.nav__link.btn--flat(href='/wishlist') Wishlist
+                li.nav__items
+                    a.nav__link.btn--flat(href='/cart') Cart
+                li.nav__items
+                    a.nav__link.btn--flat(href='/profile') Profile
+
         header.header
         include _header
 
