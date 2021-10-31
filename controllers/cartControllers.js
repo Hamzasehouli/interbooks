@@ -1,5 +1,6 @@
 const AsyncHandler = require('../utilities/AsyncHandler.js');
 const Cart = require('../models/cartModel.js');
+// const User = require('../models/userModel.js');
 
 exports.getCarts = AsyncHandler(async function (req, res, next) {
   let obj = {};
@@ -40,7 +41,7 @@ exports.updateCart = AsyncHandler(async function (req, res, next) {
 });
 
 exports.deleteCart = AsyncHandler(async function (req, res, next) {
-  await Cart.findByIdAndDelete(req.params.cartId);
+  await Cart.deleteMany({ user: req.params.userId, book: req.params.bookId });
   res.status(204).json({
     status: 'success',
     message: 'Cart is deleted successfully',

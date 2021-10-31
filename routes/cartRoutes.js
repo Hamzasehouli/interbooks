@@ -8,6 +8,8 @@ const router = express.Router();
 router.use(authControllers.isLoggedIn);
 // router.use(authControllers.protect('admin'));
 
+router.route('/delete-cart/:userId/:bookId').delete(cartControllers.deleteCart);
+
 router
   .route('/')
   .post(cartControllers.createCart)

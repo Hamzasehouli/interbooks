@@ -21,7 +21,7 @@ block content
                                 p(style='color: var(--color-secondary-dark)') Quantity: #{book.quant}
                                 .cta
                                     button Increase
-                                    button Delete
+                                    button.delete-cart(data-user=user.id data-book=book.asn.id) Delete
                                     button Save for later
                             .cart__item__price(style='color: var(--color-ok)') MAD #{book.asn.price}
                     
