@@ -16,8 +16,34 @@ const emailRoutes = require('./routes/emailRoutes');
 const ErrorHandler = require('./utilities/ErrorHandler');
 const errorController = require('./controllers/errorController.js');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
+
+const imageId = (function (n) {
+  const chars =
+    '1234567890qwertzuioplkjhgfdsayxcvbnmYXCVBNMLKJHGFDSAQWEERTZUIOP';
+  let str = '';
+  for (let i = 0; i < n; i++) {
+    let randomNum = Math.floor(Math.random() * n);
+    str += chars[randomNum];
+  }
+  return str;
+})(15);
+
+let storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/users');
+  },
+  filename: function (req, file, cb) {
+    let ext = '.jpeg';
+
+    cb(null, imageId + new Date().getTime() + ext);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const app = express();
+app.use(upload.single('photo'));
 app.use(express.json());
 app.use(cookieParser());
 // app.use(express.json({ limit: '10kb' }));

@@ -86,6 +86,7 @@ router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
   res.status(200).render('_cart', { price, kaka, items });
 });
 router.get('/profile', authControllers.isLoggedIn, (req, res, next) => {
+  console.log('öööööööööööööööööööööööööööööööö');
   res.status(200).render('_profile', { user: req.user });
 });
 

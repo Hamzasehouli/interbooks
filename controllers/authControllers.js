@@ -359,7 +359,6 @@ exports.protect = function (...roles) {
 //UPDATE DATA-----------------------------------------------------------------------------------------------------
 
 exports.updateData = AsyncHandler(async (req, res, next) => {
-  console.log('++++++');
   let obj = {};
   const { firstName, lastName, userName, email, password } = req.body;
 

@@ -97,6 +97,19 @@ exports.deleteUser = AsyncHandler(async function (req, res, next) {
   });
 });
 
+exports.uploadImage = AsyncHandler(async function (req, res, next) {
+  await User.findByIdAndUpdate(req.user.id, {
+    image: req.file.filename,
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      message: 'The photo has been updated successfully',
+    },
+  });
+  // res.send(req.body.photo);
+});
+
 exports.deactivateUser = AsyncHandler(async function (req, res, next) {
   const user = await User.findById(req.params.userId).select('+password');
   user.active = false;

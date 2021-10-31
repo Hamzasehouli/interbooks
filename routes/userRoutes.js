@@ -12,6 +12,7 @@ router
   .patch(authControllers.resetPassword);
 router.route('/logout').post(authControllers.logout);
 router.use(authControllers.isLoggedIn);
+router.route('/upload-image').post(userControllers.uploadImage);
 router.route('/change-password').patch(authControllers.changePassword);
 router.route('/update-data').patch(authControllers.updateData);
 router.route('/delete-account').patch(authControllers.deactivateAccount);
