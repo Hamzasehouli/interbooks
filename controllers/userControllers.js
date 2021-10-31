@@ -1,3 +1,4 @@
+const fs = require('fs');
 const AsyncHandler = require('../utilities/AsyncHandler.js');
 const User = require('../models/userModel.js');
 
@@ -107,7 +108,19 @@ exports.uploadImage = AsyncHandler(async function (req, res, next) {
       message: 'The photo has been updated successfully',
     },
   });
-  // res.send(req.body.photo);
+});
+exports.removePhoto = AsyncHandler(async function (req, res, next) {
+  fs.unlinkSync(`${__dirname}/../public/images/users/${req.user.image}`);
+
+  await User.findByIdAndUpdate(req.user.id, {
+    image: '',
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      message: 'The photo has been removed successfully',
+    },
+  });
 });
 
 exports.deactivateUser = AsyncHandler(async function (req, res, next) {

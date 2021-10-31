@@ -21,9 +21,12 @@ block content
                         form(style="display:flex;justify-content:center;margin-bottom:2rem" method="post" enctype="multipart/form-data").upload-image
                             input(name="photo" style='display:none' id="photo"  type="file" class="upload-image__input") 
                             label.btn--cta( for="photo" style='margin-right:1rem;cursor:pointer;margin-bottom: 2rem; padding: 0.5rem 1.5rem')
-                                | Update photo
+                                | Upload photo
                             button.btn--cta(type="submit" style='cursor:pointer;margin-bottom: 2rem; padding: 0.5rem 1.5rem')
                                 | Save
+                            if user.image    
+                                button.btn--cta.remove-photo(type="button" style='margin-left:1rem;cursor:pointer;margin-bottom: 2rem; padding: 0.5rem 1.5rem')
+                                    | Remove photo
                         h2 #{user.firstName} #{user.lastName}
                     form.update-data-form
                         h2 Update data

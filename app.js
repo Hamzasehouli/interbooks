@@ -31,7 +31,7 @@ const imageId = (function (n) {
 
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/images/users');
+    cb(null, __dirname + '/public/images/users');
   },
   filename: function (req, file, cb) {
     let ext = '.jpeg';

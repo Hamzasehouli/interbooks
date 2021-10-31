@@ -630,10 +630,10 @@ a {
   text-decoration: none;
   color: inherit;
   margin-bottom: 0.5rem;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 .footer__link:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-secondary-dark);
 }
 
 .sub-footer {

@@ -16,3 +16,4 @@ import addToCart from './addToCart.js';
 import hamburger from './hamburger.js';
 import close from './close.js';
 import uploadImage from './uploadImage.js';
+import removePhoto from './removePhoto.js';
