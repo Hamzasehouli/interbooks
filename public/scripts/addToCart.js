@@ -14,6 +14,9 @@ export default Array.from(addToCart).forEach((a) => {
         }),
       });
       const data = await res.json();
+      if (res.ok) {
+        window.location.replace('/cart');
+      }
     } catch (err) {
       console.log(err);
     }

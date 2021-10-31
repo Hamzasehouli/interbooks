@@ -14,6 +14,9 @@ export default Array.from(wishListBtn).forEach((b) => {
         }),
       });
       const data = await res.json();
+      if (res.ok) {
+        window.location.replace('/wishlist');
+      }
     } catch (err) {
       console.log(err);
     }
