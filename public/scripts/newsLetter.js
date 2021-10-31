@@ -2,7 +2,7 @@ const newsLetter = document.querySelector('.newsLetter__form');
 const newsLetterInput = document.querySelector('.newsLetter__form__input');
 export default newsLetter.addEventListener('submit', async (e) => {
   e.preventDefault();
-  console.log(newsLetterInput.value);
+  
   const theEmail = newsLetterInput.value.trim().toLowerCase();
   if (!theEmail.includes('@') || !theEmail.split('@')[1].includes('.')) {
     return;
@@ -15,6 +15,5 @@ export default newsLetter.addEventListener('submit', async (e) => {
     body: JSON.stringify({ email: theEmail }),
   });
   const data = await res.json();
-  console.log(data);
   newsLetterInput.value = '';
 });

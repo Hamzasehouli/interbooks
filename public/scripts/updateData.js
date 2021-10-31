@@ -19,7 +19,7 @@ export default document
       userName: userName.value,
       email: email.value,
     };
-    console.log(obj);
+
     addSpinner(this);
     const res = await fetch('http://127.0.0.1:3000/api/v1/users/update-data', {
       method: 'PATCH',

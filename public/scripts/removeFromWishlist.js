@@ -12,7 +12,6 @@ export default Array.from(deleteWishlist)?.forEach((b) => {
         body: JSON.stringify({ user: b.dataset.user, book: b.dataset.book }),
       }
     );
-    console.log(res);
     if (res.ok) {
       location.reload();
     }

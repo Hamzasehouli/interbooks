@@ -18,7 +18,7 @@ export default document
         newPassword: newPassword.value,
         confirmNewPassword: confirmNewPassword.value,
       };
-      console.log(obj);
+
       addSpinner(this);
       const res = await fetch(
         `http://127.0.0.1:3000/api/v1/users/change-password`,

@@ -8,6 +8,6 @@ export default removePhotoBtn?.addEventListener('click', async (e) => {
     method: 'POST',
   });
   if (res.ok) {
-    window.location.replace('/profile');
+    location.realod();
   }
 });
