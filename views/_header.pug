@@ -30,8 +30,15 @@ header.header
             if user        
                 li.nav__items
                     a.nav__link.btn--outline(href='/wishlist') Wishlist
+                    if wishlistBooks.length > 0
+                        span.notif= wishlistBooks.length
+                        
+                        
+                         
                 li.nav__items
                     a.nav__link.btn--outline(href='/cart') Cart
+                    if cartBooks > 0
+                        span.notif= cartBooks
              
                 li.nav__items
                     a.nav__link.btn--outline(href='/profile') Profile

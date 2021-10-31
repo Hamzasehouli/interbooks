@@ -3,6 +3,10 @@ const AsyncHandler = require('../utilities/AsyncHandler');
 const SendEmail = require('../utilities/SendEmail');
 const ErrorHandler = require('../utilities/ErrorHandler');
 const User = require('../models/userModel.js');
+const Book = require('../models/bookModel.js');
+const Cart = require('../models/cartModel.js');
+const Wishlist = require('../models/wishlistModel.js');
+const mongoose = require('mongoose');
 
 const sendCookie = function (res, token) {
   res.cookie('jwt', token, {
@@ -506,8 +510,56 @@ exports.checkUser = AsyncHandler(async function (req, res, next) {
       // );
       return next();
     }
+    const resu = await Cart.aggregate([
+      { $match: { user: mongoose.Types.ObjectId(user.id) } },
+      {
+        $group: {
+          _id: '$book',
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: 'Book',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'allbooks',
+        },
+      },
+    ]);
+
+    const kaka = await Promise.all(
+      resu.map(async (a) => {
+        return {
+          asn: await Book.findById(a._id),
+          quant: a.count,
+          price() {
+            return this.asn.price * this.quant;
+          },
+        };
+      })
+    );
+
+    const price = kaka.reduce((p, c) => {
+      return p + c.price();
+    }, 0);
+
+    const items = kaka.reduce((p, c) => {
+      return p + c.quant;
+    }, 0);
+    // res.status(200).render('_cart', { price, kaka, items });
+    res.locals.cartBooks = items;
+    console.log(items, '++++++++++++++++++++++++++++++++++++++++++++++++++');
+    const wishlist = await Wishlist.find({ user: user.id });
+
+    const data = wishlist.map(async (w) => {
+      return await Book.findById(w.book);
+    });
+
+    const wishlistBooks = await Promise.all(data);
     res.locals.user = user;
-    // req.user = user;
+    res.locals.wishlistBooks = wishlistBooks;
+    req.user = user;
     next();
   });
 });

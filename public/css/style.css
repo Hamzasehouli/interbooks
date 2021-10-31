@@ -900,7 +900,7 @@ a {
   --color-dark: #23231a;
   --color-light: #e2f4f3;
   --color-error: #e43f6f;
-  --color-ok: #59ffa0;
+  --color-ok: #3ddc84;
 }
 
 .loader {
@@ -1043,4 +1043,18 @@ a {
     margin: 1rem 0;
     align-self: flex-start !important;
   }
+}
+
+.notif {
+  border-radius: 50%;
+  background: var(--color-secondary-dark);
+  color: var(--color-light);
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.3rem;
+  text-align: center;
+  font-size: 1rem;
+  position: relative;
+  top: -2rem;
 }

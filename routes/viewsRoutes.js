@@ -59,8 +59,6 @@ router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
     },
   ]);
 
-  console.log(resu);
-
   const kaka = await Promise.all(
     resu.map(async (a) => {
       return {
@@ -73,20 +71,17 @@ router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
     })
   );
 
-  console.log(kaka);
-
   const price = kaka.reduce((p, c) => {
     return p + c.price();
   }, 0);
-  console.log(price, 'äääääääääääääääääääääääääääääääääää');
 
   const items = kaka.reduce((p, c) => {
     return p + c.quant;
   }, 0);
+  // res.locals.cartBooks = items;
   res.status(200).render('_cart', { price, kaka, items });
 });
 router.get('/profile', authControllers.isLoggedIn, (req, res, next) => {
-  console.log('öööööööööööööööööööööööööööööööö');
   res.status(200).render('_profile', { user: req.user });
 });
 
@@ -98,7 +93,6 @@ router.get('/wishlist', authControllers.isLoggedIn, async (req, res, next) => {
   });
 
   const books = await Promise.all(data);
-  console.log(books);
 
   res.status(200).render('_wishlist', { user: req.user, books });
 });

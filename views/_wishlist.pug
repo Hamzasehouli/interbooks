@@ -11,15 +11,18 @@ block content
                 each book in books
                     if book
                         li.item
-                            span.like.deleteWishlist(type='button' data-user=`${user.id}` data-book=`${book.id}`) 
-                                svg
-                                    use(href='/sprite.svg#icon-bin')
+                            if user
+                                span.like.deleteWishlist(type='button' data-user=`${user.id}` data-book=`${book.id}`) 
+                                    svg
+                                        use(href='/sprite.svg#icon-bin')
                             a(href=`/book/${book.slug}`)
                                 img.img(src=`${book.coverImage}`)
                             a(href=`/book/${book.slug}`)
-                                h3= book.name
-                            p.format= book.format
-                            p.author= `${book.author.join(', ')}`
-                            p.state Used
-                            p.price #{book.price} MAD
-                            button.btn.btn--flat.addToCart(data-user=`${user.id}` data-book=`${book.id}`)  Add to cart      
+                                h3=`${book.name.includes('-') ? book.name.split('-').join(' ').toUpperCase() : book.name.toUpperCase()}`
+                            p.format= `${book.format.toUpperCase()}`
+                            
+                            a.author(style="textDecoration:none;color:black")(href=`/author/${book.author}`)= `${book.author.map(a=> a.includes('-') ? a.split('-').join(' ').toUpperCase() : a.toUpperCase()).join(', ')}`
+                            p.state= book.status
+                            p.price MAD #{book.price} 
+                            if user
+                                button.btn.btn--flat.addToCart(data-user=`${user.id}` data-book=`${book.id}`)  Add to cart     
