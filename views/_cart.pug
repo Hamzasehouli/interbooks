@@ -24,9 +24,13 @@ block content
                                     p(style='color: var(--color-ok)') In Stock
                                     p(style='color: var(--color-secondary-dark)') Quantity: #{book.quant}
                                     .cta
-                                        button Increase
+                                        -let n=-1;
+                                        select#select.increase-quantity(data-user=user.id data-book=book.asn.id name='quantity')
+                                            while n < 30
+                                                -n++
+                                                option.book__option(value=n) Qty: #{n}
                                         button.delete-cart(data-user=user.id data-book=book.asn.id) Delete
-                                        button Save for later
+                                        
                                 .cart__item__price(style='color: var(--color-ok)') MAD #{book.asn.price}
                         
                     .cart__checkout

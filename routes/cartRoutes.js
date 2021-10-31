@@ -10,10 +10,8 @@ router.use(authControllers.isLoggedIn);
 
 router.route('/delete-cart/:userId/:bookId').delete(cartControllers.deleteCart);
 
-router
-  .route('/')
-  .post(cartControllers.createCart)
-  .get(cartControllers.getCarts);
+router.route('/:userId?/:bookId?').post(cartControllers.createCart);
+router.route('/').get(cartControllers.getCarts);
 
 router
   .route('/:reviewId')

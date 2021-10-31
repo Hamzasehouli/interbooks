@@ -19,11 +19,14 @@ exports.getCarts = AsyncHandler(async function (req, res, next) {
 });
 
 exports.createCart = AsyncHandler(async function (req, res, next) {
-  const obj = {
-    book: req.body.book,
-    user: req.body.user,
-  };
-  const cart = await Cart.create(obj);
+  await Cart.deleteMany({ user: req.params.userId, book: req.params.bookId });
+  // console.log('jajajaj');
+  // console.log(req.body);
+  // const obj = {
+  //   book: req.body.book,
+  //   user: req.body.user,
+  // };
+  const cart = await Cart.create(req.body);
   res.status(201).json({
     status: 'success',
     data: {
