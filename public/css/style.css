@@ -249,6 +249,10 @@ a {
     display: none;
   }
 }
+
+.nav__items {
+  position: relative;
+}
 .nav__items:not(:last-child) {
   margin-right: 2rem;
 }
@@ -1055,6 +1059,7 @@ a {
   padding: 0.3rem;
   text-align: center;
   font-size: 1rem;
-  position: relative;
+  position: absolute;
   top: -2rem;
+  left: -1rem;
 }

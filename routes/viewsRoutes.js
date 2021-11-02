@@ -14,23 +14,27 @@ router.get('/', async (req, res, next) => {
   const trendingBooks = await Book.find({ isTrending: true });
   res.status(200).render('_overview', { books: trendingBooks });
 });
+
 router.get('/author/:author', async (req, res, next) => {
   console.log(req.params.author);
   const author = await Author.findOne({ name: req.params.author }).populate(
     'books'
   );
-  console.log(author);
+
   if (!author) {
     return res.status(404).render('_error', { err: 'walo' });
   }
   res.status(200).render('_author', { author });
 });
+
 router.get('/signup', (req, res, next) => {
   res.status(200).render('_signup', { user: req.user });
 });
+
 router.get('/login', (req, res, next) => {
   res.status(200).render('_login', { user: req.user });
 });
+
 router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
   // const cart = req.user.cart;
   // console.log(req.user.id);
