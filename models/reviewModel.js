@@ -6,10 +6,6 @@ const reviewSchema = mongoose.Schema(
       type: Number,
       required: [true, 'Rating must have rating'],
     },
-    description: {
-      type: String,
-      required: [true, 'Rating must have description'],
-    },
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
@@ -26,7 +22,7 @@ const reviewSchema = mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-reviewSchema.index({ user: 1, book: 1 });
+// reviewSchema.index({ user: 1, book: 1 });
 
 const Review = mongoose.model('Review', reviewSchema);
 

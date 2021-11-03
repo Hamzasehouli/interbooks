@@ -5,6 +5,7 @@ const Book = require('../models/bookModel');
 const Wishlist = require('../models/wishlistModel');
 const Author = require('../models/authorModel');
 const Cart = require('../models/cartModel');
+const Review = require('../models/reviewModel');
 
 const router = express.Router();
 
@@ -111,7 +112,24 @@ router.get('/reset-password/:resetToken', (req, res, next) => {
 });
 router.get('/book/:bookSlug', async (req, res, next) => {
   const book = await Book.findOne({ slug: req.params.bookSlug });
-  res.status(200).render('_book', { book: book });
+
+  // console.log(book.reviews);
+
+  const [results] = await Review.aggregate([
+    {
+      $match: {
+        book: mongoose.Types.ObjectId(book.id),
+      },
+    },
+    {
+      $group: {
+        _id: '$book',
+        ratingCount: { $sum: 1 },
+        ratingAverage: { $avg: '$rating' },
+      },
+    },
+  ]);
+  res.status(200).render('_book', { book, results });
 });
 router.get('/books/:val', async (req, res, next) => {
   console.log(req.params.val);

@@ -20,10 +20,10 @@ exports.getReviews = AsyncHandler(async function (req, res, next) {
 exports.createReview = AsyncHandler(async function (req, res, next) {
   const obj = {
     rating: req.body.rating,
-    description: req.body.description,
-    book: req.params.bookId,
+    book: req.body.book,
     user: req.body.user,
   };
+  console.log(obj);
   const review = await Review.create(obj);
   res.status(201).json({
     status: 'success',

@@ -968,9 +968,13 @@ a {
   margin: 0 auto 3rem auto;
 }
 .book__star {
+  cursor: pointer;
   width: 3rem;
   height: 3rem;
   fill: var(--color-secondary);
+}
+.book__star:hover {
+  transform: scale(1.1);
 }
 @media only screen and (max-width: 42.5rem) {
   .book__star {

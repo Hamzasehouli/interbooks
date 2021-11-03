@@ -3,6 +3,7 @@ const Book = require('../models/bookModel.js');
 
 exports.getBooks = AsyncHandler(async function (req, res, next) {
   const books = await Book.find();
+
   res.status(200).json({
     status: 'success',
     results: books.length,
@@ -13,7 +14,6 @@ exports.getBooks = AsyncHandler(async function (req, res, next) {
 });
 
 exports.createBook = AsyncHandler(async function (req, res, next) {
-  console.log(req.body);
   const book = await Book.create(req.body);
   res.status(201).json({
     status: 'success',

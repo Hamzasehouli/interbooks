@@ -549,7 +549,7 @@ exports.checkUser = AsyncHandler(async function (req, res, next) {
     }, 0);
     // res.status(200).render('_cart', { price, kaka, items });
     res.locals.cartBooks = items;
-    
+
     const wishlist = await Wishlist.find({ user: user.id });
 
     const data = wishlist.map(async (w) => {

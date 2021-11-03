@@ -19,3 +19,4 @@ import uploadImage from './uploadImage.js';
 import removePhoto from './removePhoto.js';
 import deleteCart from './deleteCart.js';
 import increaseQuantity from './increaseQuantity.js';
+import addReview from './addReview.js';

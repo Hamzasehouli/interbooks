@@ -44,9 +44,6 @@ const bookSchema = mongoose.Schema(
     releasedAt: {
       type: Date,
     },
-    reviews: {
-      type: mongoose.Schema.ObjectId,
-    },
     comments: {
       type: mongoose.Schema.ObjectId,
     },
@@ -81,6 +78,12 @@ const bookSchema = mongoose.Schema(
 );
 
 bookSchema.index({ price: 1 });
+
+bookSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'book',
+  localField: '_id',
+});
 
 bookSchema.pre('save', function (next) {
   console.log(this);
