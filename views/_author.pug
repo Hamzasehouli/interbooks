@@ -5,9 +5,10 @@ block content
         .container
             figure.auth__details
                 img.auth__img(style='objectFit:cover;' src=`/images/authors/${author.name}.jpg` alt=`${author.name}photo`)
-                h2 Mj Demarco
+                h2= `${author.name.replace(/-/g,' ').split(' ').map(a=>a[0].toUpperCase()+a.slice(1)).join(' ')}`
                 p.auth__about
-                    | Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor corporis inventore magnam sit aliquam suscipit tempora ipsam, dolores, neque ipsum atque eos natus veniam hic error asperiores culpa adipisci.
+                    //- | Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor corporis inventore magnam sit aliquam suscipit tempora ipsam, dolores, neque ipsum atque eos natus veniam hic error asperiores culpa adipisci.
+                   
             ul.list
                 if author.books && author.books.length > 0  
                     each book in author.books
