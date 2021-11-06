@@ -37,5 +37,5 @@ block content
                         p
                             | Total of items(#{items}):
                             span(style='font-weight: 700')  MAD #{price}
-                        a.cart__checkout__btn.btn--cta(href='#') Proceed to checkout
+                        button.cart__checkout__btn.btn--cta#checkout(data-bookid=book.asn.id data-quant=book.quant) Proceed to checkout
 
