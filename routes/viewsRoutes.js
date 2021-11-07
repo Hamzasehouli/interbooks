@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/author/:author', async (req, res, next) => {
-  console.log(req.params.author);
   const author = await Author.findOne({ name: req.params.author }).populate(
     'books'
   );
@@ -38,7 +37,6 @@ router.get('/login', (req, res, next) => {
 
 router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
   // const cart = req.user.cart;
-  // console.log(req.user.id);
 
   // const books = await Promise.all(
   //   cart.map(async (c) => {
@@ -113,8 +111,6 @@ router.get('/reset-password/:resetToken', (req, res, next) => {
 router.get('/book/:bookSlug', async (req, res, next) => {
   const book = await Book.findOne({ slug: req.params.bookSlug });
 
-  // console.log(book.reviews);
-
   const [results] = await Review.aggregate([
     {
       $match: {
@@ -132,7 +128,6 @@ router.get('/book/:bookSlug', async (req, res, next) => {
   res.status(200).render('_book', { book, results });
 });
 router.get('/books/:val', async (req, res, next) => {
-  console.log(req.params.val);
   const quer = req.params.val.toLowerCase().split(' ').join('-');
 
   const resp = await Promise.all([
@@ -142,14 +137,14 @@ router.get('/books/:val', async (req, res, next) => {
   ]);
 
   const [books] = resp.filter((r) => r.length > 0);
-  console.log(books);
+
   res.status(200).render('_books', { books: books });
 });
 
 router.get('/category/:category', async (req, res, next) => {
   const quer = req.params.category;
   const books = await Book.find({ category: { $in: [quer] } });
-  console.log(books);
+
   res.status(200).render('_books', { books: books });
 });
 

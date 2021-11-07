@@ -29,5 +29,3 @@ process.on('unhandledRejection', function (err) {
     process.exit(1);
   });
 });
-
-console.log(process.env.NODE_ENV);

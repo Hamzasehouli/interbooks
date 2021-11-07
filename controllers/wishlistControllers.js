@@ -7,7 +7,7 @@ exports.createWishlist = AsyncHandler(async (req, res, next) => {
     user: req.body.user,
     book: req.body.book,
   };
-  console.log(obj);
+
   const createdWishList = await Wishlist.create(obj);
   res.status(201).json({
     status: 'success',

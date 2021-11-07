@@ -86,7 +86,6 @@ bookSchema.virtual('reviews', {
 });
 
 bookSchema.pre('save', function (next) {
-  console.log(this);
   this.slug = slugify(this.name);
   next();
 });

@@ -27,7 +27,7 @@ exports.createSession = AsyncHandler(async (req, res, next) => {
       },
     },
   ]);
-  console.log(resul);
+
   // 1) get tour
   const cart = await Cart.find({ user: req.params.userId }).populate('book');
   const lineItems = resul.map((c) => {

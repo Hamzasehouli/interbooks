@@ -1,5 +1,6 @@
 const path = require('path');
 const helmet = require('helmet');
+const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -44,6 +45,8 @@ let storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const app = express();
+app.use(compression());
+
 app.use(upload.single('photo'));
 app.use(express.json());
 app.use(cookieParser());
@@ -67,7 +70,6 @@ app.use(express.static('public'));
 
 app.use(function (req, res, next) {
   console.log(new Date());
-  console.log(req.cookies);
   next();
 });
 
