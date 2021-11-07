@@ -4,7 +4,7 @@ const removePhotoBtn = document.querySelector('.remove-photo');
 export default removePhotoBtn?.addEventListener('click', async (e) => {
   e.preventDefault();
 
-  const res = await fetch('http://127.0.0.1:3000/api/v1/users/remove-photo', {
+  const res = await fetch('/api/v1/users/remove-photo', {
     method: 'POST',
   });
   if (res.ok) {

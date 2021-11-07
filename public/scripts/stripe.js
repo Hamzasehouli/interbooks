@@ -5,7 +5,7 @@ const checkoutBtn = document.getElementById('checkout');
 
 export default checkoutBtn?.addEventListener('click', async function (e) {
   const res = await fetch(
-    `http://127.0.0.1:3000/api/v1/purchase/checkout-session/${this.dataset.userid}`
+    `/api/v1/purchase/checkout-session/${this.dataset.userid}`
   );
 
   const session = await res.json();

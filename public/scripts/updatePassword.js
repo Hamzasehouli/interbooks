@@ -20,16 +20,13 @@ export default document
       };
 
       addSpinner(this);
-      const res = await fetch(
-        `http://127.0.0.1:3000/api/v1/users/change-password`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/JSON',
-          },
-          body: JSON.stringify(obj),
-        }
-      );
+      const res = await fetch(`/api/v1/users/change-password`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/JSON',
+        },
+        body: JSON.stringify(obj),
+      });
 
       removeSpinner(this);
 

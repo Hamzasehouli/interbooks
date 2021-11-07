@@ -14,7 +14,7 @@ export default document
       password: password.value,
     };
     addSpinner(this);
-    const res = await fetch('http://127.0.0.1:3000/api/v1/users/login', {
+    const res = await fetch('/api/v1/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/JSON',

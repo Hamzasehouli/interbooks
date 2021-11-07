@@ -18,16 +18,13 @@ export default Array.from(increaseQuantity).forEach((el) => {
 
     console.log(data);
 
-    const res = await fetch(
-      `http://127.0.0.1:3000/api/v1/cart/${payload.user}/${payload.book}`,
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/JSON',
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const res = await fetch(`/api/v1/cart/${payload.user}/${payload.book}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/JSON',
+      },
+      body: JSON.stringify(data),
+    });
 
     if (res.ok) {
       location.reload();

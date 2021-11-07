@@ -13,7 +13,7 @@ export default document
     };
     addSpinner(this);
     const res = await fetch(
-      'http://127.0.0.1:3000/api/v1/users/forget-password',
+      '/api/v1/users/forget-password',
       {
         method: 'POST',
         headers: {

@@ -1,9 +1,9 @@
 const wishListBtn = document.querySelectorAll('.overviewLike');
 
 export default Array.from(wishListBtn).forEach((b) => {
-  b.addEventListener('click', async (e) => {
+  b.addEventListener('click', async () => {
     try {
-      const res = await fetch('http://127.0.0.1:3000/api/v1/wishlist', {
+      const res = await fetch(`/api/v1/wishlist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export default Array.from(wishListBtn).forEach((b) => {
           book: b.dataset.book,
         }),
       });
-      const data = await res.json();
+
       if (res.ok) {
         window.location.replace('/wishlist');
       }

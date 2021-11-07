@@ -21,7 +21,7 @@ export default document
     };
 
     addSpinner(this);
-    const res = await fetch('http://127.0.0.1:3000/api/v1/users/update-data', {
+    const res = await fetch('/api/v1/users/update-data', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/JSON',

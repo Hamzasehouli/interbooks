@@ -7,13 +7,16 @@ export default Array.from(reviewStarBtn).forEach((review) => {
       book: this.dataset.book,
       user: this.dataset.user,
     };
-    const res = await fetch('http://127.0.0.1:3000/api/v1/reviews', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+    const res = await fetch(
+      `${window.location.protocol}//${window.location.host}/api/v1/reviews`,
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      }
+    );
 
     const data = await res.json();
     console.log(data);
