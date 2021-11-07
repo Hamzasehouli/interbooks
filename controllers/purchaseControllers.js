@@ -79,21 +79,21 @@ exports.createSession = AsyncHandler(async (req, res, next) => {
 //   });
 // });
 
-// exports.createPurchase = AsyncHandler(async function (req, res, next) {
-//   const obj = {
-//     rating: req.body.rating,
-//     description: req.body.description,
-//     book: req.params.bookId,
-//     user: req.body.user,
-//   };
-//   const purchase = await Purchase.create(obj);
-//   res.status(201).json({
-//     status: 'success',
-//     data: {
-//       purchase,
-//     },
-//   });
-// });
+exports.createPurchase = AsyncHandler(async function (req, res, next) {
+  const obj = {
+    rating: req.body.rating,
+    description: req.body.description,
+    book: req.params.bookId,
+    user: req.body.user,
+  };
+  const purchase = await Purchase.create(obj);
+  res.status(201).json({
+    status: 'success',
+    data: {
+      purchase,
+    },
+  });
+});
 
 // exports.updatePurchase = AsyncHandler(async function (req, res, next) {
 //   await Purchase.findByIdAndUpdate(req.params.purchaseId, req.body);

@@ -11,10 +11,20 @@ const purchaseModel = mongoose.Schema({
   },
   totalPrice: {
     type: Number,
-    required,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+  },
+  singlePrice: {
+    type: Number,
+  },
+  added_at: {
+    type: Date,
+    default: Date.now(),
   },
 });
 
 const Purchase = mongoose.model('Purchase', purchaseModel);
 
-module.exports = Cart;
+module.exports = Purchase;

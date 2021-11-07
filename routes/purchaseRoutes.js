@@ -9,5 +9,6 @@ router.use(authControllers.isLoggedIn);
 // router.use(authControllers.protect('admin'));
 
 router.get('/checkout-session/:userId/', purchaseControllers.createSession);
+router.post('/', purchaseControllers.createPurchase);
 
 module.exports = router;

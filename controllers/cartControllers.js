@@ -1,5 +1,7 @@
 const AsyncHandler = require('../utilities/AsyncHandler.js');
 const Cart = require('../models/cartModel.js');
+const Purchase = require('../models/purchaseModel.js');
+const mongoose = require('mongoose');
 // const User = require('../models/userModel.js');
 
 exports.getCarts = AsyncHandler(async function (req, res, next) {
@@ -46,6 +48,41 @@ exports.deleteCart = AsyncHandler(async function (req, res, next) {
 });
 
 exports.deleteAllCart = AsyncHandler(async (req, res, next) => {
+  const resul = await Cart.aggregate([
+    {
+      $match: {
+        user: mongoose.Types.ObjectId(req.params.userId),
+      },
+    },
+    {
+      $group: {
+        _id: '$book',
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $lookup: {
+        from: 'books',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'book_doc',
+      },
+    },
+  ]);
+  console.log(resul);
+
+  const purchaseRaw = resul.map((p) => {
+    return {
+      user: req.params.userId,
+      book: p._id,
+      singlePrice: p.book_doc[0].price,
+      quantity: p.count,
+      totalPrice: p.count * p.book_doc[0].price,
+    };
+  });
+  console.log(purchaseRaw);
+  const purchase = await Purchase.create(purchaseRaw);
+  console.log(purchase);
   await Cart.deleteMany({ user: req.params.userId });
   res.redirect('/cart');
 });
