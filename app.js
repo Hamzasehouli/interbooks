@@ -58,7 +58,8 @@ app.use(xss());
 
 // //  apply to all requests
 // app.use(limiter);
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
+// app.use(helmet());
 app.disable('x-powered-by');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

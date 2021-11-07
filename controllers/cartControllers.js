@@ -50,3 +50,8 @@ exports.deleteCart = AsyncHandler(async function (req, res, next) {
     message: 'Cart is deleted successfully',
   });
 });
+
+exports.deleteAllCart = AsyncHandler(async (req, res, next) => {
+  await Cart.deleteMany({ user: req.params.userId });
+  res.redirect('/cart');
+});

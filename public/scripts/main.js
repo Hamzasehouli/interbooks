@@ -20,3 +20,4 @@ import removePhoto from './removePhoto.js';
 import deleteCart from './deleteCart.js';
 import increaseQuantity from './increaseQuantity.js';
 import addReview from './addReview.js';
+import stripe from './stripe.js';

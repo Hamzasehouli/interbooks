@@ -1,22 +1,49 @@
+const mongoose = require('mongoose');
 const AsyncHandler = require('../utilities/AsyncHandler.js');
 const Cart = require('../models/cartModel.js');
+const Book = require('../models/bookModel');
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
 exports.createSession = AsyncHandler(async (req, res, next) => {
-  //1) get tour
+  const resul = await Cart.aggregate([
+    {
+      $match: {
+        user: mongoose.Types.ObjectId(req.params.userId),
+      },
+    },
+    {
+      $group: {
+        _id: '$book',
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $lookup: {
+        from: 'books',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'book_doc',
+      },
+    },
+  ]);
+  console.log(resul);
+  // 1) get tour
   const cart = await Cart.find({ user: req.params.userId }).populate('book');
-  const lineItems = cart.map((c) => {
+  const lineItems = resul.map((c) => {
     return {
       price_data: {
         currency: 'usd',
         product_data: {
-          name: c.book.title,
+          name: c.book_doc[0].title
+            .split('-')
+            .map((l) => l.toUpperCase())
+            .join(' '),
         },
-        unit_amount: c.book.price * 10,
+        unit_amount: c.book_doc[0].price * 10,
       },
-      quantity: 1,
-      description: c.book.about,
+      quantity: c.count,
+      description: c.book_doc[0].about,
     };
   });
 
@@ -27,7 +54,9 @@ exports.createSession = AsyncHandler(async (req, res, next) => {
     mode: 'payment',
     customer_email: req.user.email,
     client_reference_id: req.params.bookId,
-    success_url: `${req.protocol}://${req.get('host')}`,
+    success_url: `${req.protocol}://${req.get(
+      'host'
+    )}/api/v1/cart/delete-all-cart/${req.user.id}`,
     cancel_url: `${req.protocol}://${req.get('host')}`,
   });
   res.status(200).json({

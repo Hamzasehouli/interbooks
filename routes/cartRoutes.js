@@ -9,6 +9,7 @@ router.use(authControllers.isLoggedIn);
 // router.use(authControllers.protect('admin'));
 
 router.route('/delete-cart/:userId/:bookId').delete(cartControllers.deleteCart);
+router.route('/delete-all-cart/:userId/').get(cartControllers.deleteAllCart);
 
 router.route('/:userId?/:bookId?').post(cartControllers.createCart);
 router.route('/').get(cartControllers.getCarts);
