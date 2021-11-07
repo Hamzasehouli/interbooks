@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const AsyncHandler = require('../utilities/AsyncHandler.js');
 const Cart = require('../models/cartModel.js');
-const Book = require('../models/bookModel');
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
 
@@ -29,7 +28,6 @@ exports.createSession = AsyncHandler(async (req, res, next) => {
   ]);
 
   // 1) get tour
-  const cart = await Cart.find({ user: req.params.userId }).populate('book');
   const lineItems = resul.map((c) => {
     return {
       price_data: {

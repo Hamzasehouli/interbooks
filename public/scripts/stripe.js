@@ -10,7 +10,6 @@ export default checkoutBtn?.addEventListener('click', async function (e) {
 
   const session = await res.json();
 
-  console.log(session.session.id);
   await stripe.redirectToCheckout({
     sessionId: session.session.id,
   });
