@@ -69,7 +69,6 @@ exports.deleteAllCart = AsyncHandler(async (req, res, next) => {
       },
     },
   ]);
-  console.log(resul);
 
   const purchaseRaw = resul.map((p) => {
     return {
@@ -80,9 +79,9 @@ exports.deleteAllCart = AsyncHandler(async (req, res, next) => {
       totalPrice: p.count * p.book_doc[0].price,
     };
   });
-  console.log(purchaseRaw);
-  const purchase = await Purchase.create(purchaseRaw);
-  console.log(purchase);
+
+  await Purchase.create(purchaseRaw);
+
   await Cart.deleteMany({ user: req.params.userId });
   res.redirect('/cart');
 });
