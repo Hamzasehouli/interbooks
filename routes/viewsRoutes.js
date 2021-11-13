@@ -14,7 +14,7 @@ router.use(authControllers.checkUser);
 
 router.get('/', async (req, res, next) => {
   const trendingBooks = await Book.find({ isTrending: true });
-  res.status(200).render('_overview', { books: trendingBooks });
+  res.status(200).render('_overview', { books: trendingBooks, title: 'Home' });
 });
 
 router.get('/author/:author', async (req, res, next) => {
@@ -25,15 +25,15 @@ router.get('/author/:author', async (req, res, next) => {
   if (!author) {
     return res.status(404).render('_error', { err: 'walo' });
   }
-  res.status(200).render('_author', { author });
+  res.status(200).render('_author', { author, title: 'Author' });
 });
 
 router.get('/signup', (req, res, next) => {
-  res.status(200).render('_signup', { user: req.user });
+  res.status(200).render('_signup', { user: req.user, title: 'Signup' });
 });
 
 router.get('/login', (req, res, next) => {
-  res.status(200).render('_login', { user: req.user });
+  res.status(200).render('_login', { user: req.user, title: 'Login' });
 });
 
 router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
@@ -83,20 +83,22 @@ router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
     return p + c.quant;
   }, 0);
   // res.locals.cartBooks = items;
-  res.status(200).render('_cart', { price, kaka, items });
+  res.status(200).render('_cart', { price, kaka, items, title: 'Cart' });
 });
 router.get('/profile', authControllers.isLoggedIn, (req, res, next) => {
-  res.status(200).render('_profile', { user: req.user });
+  res.status(200).render('_profile', { user: req.user, title: 'Profile' });
 });
 
 router.get('/purchases', authControllers.isLoggedIn, async (req, res, next) => {
   const purchases = await Purchase.find({ user: req.user.id }).populate('book');
-  
-  res.status(200).render('_purchase', { purchases });
+
+  res.status(200).render('_purchase', { purchases, title: 'Purchase' });
 });
 
 router.get('/wishlist', authControllers.isLoggedIn, async (req, res, next) => {
-  const wishlist = await Wishlist.find({ user: req.user.id });
+  const wishlist = await Wishlist.find({
+    user: req.user.id,
+  });
 
   const data = wishlist.map(async (w) => {
     return await Book.findById(w.book);
@@ -104,15 +106,20 @@ router.get('/wishlist', authControllers.isLoggedIn, async (req, res, next) => {
 
   const books = await Promise.all(data);
 
-  res.status(200).render('_wishlist', { user: req.user, books });
+  res
+    .status(200)
+    .render('_wishlist', { user: req.user, books, title: 'Wishlist' });
 });
 
 router.get('/forget-password', (req, res, next) => {
-  res.status(200).render('_forgetpassword', { user: req.user });
+  res
+    .status(200)
+    .render('_forgetpassword', { user: req.user, title: 'Forget password' });
 });
 router.get('/reset-password/:resetToken', (req, res, next) => {
   res.status(200).render('_resetpassword', {
     resetToken: req.params.resetToken,
+    title: 'Reset password',
   });
 });
 router.get('/book/:bookSlug', async (req, res, next) => {
@@ -132,7 +139,7 @@ router.get('/book/:bookSlug', async (req, res, next) => {
       },
     },
   ]);
-  res.status(200).render('_book', { book, results });
+  res.status(200).render('_book', { book, results, title: book.title });
 });
 router.get('/books/:val', async (req, res, next) => {
   const quer = req.params.val.toLowerCase().split(' ').join('-');
@@ -145,7 +152,7 @@ router.get('/books/:val', async (req, res, next) => {
 
   const [books] = resp.filter((r) => r.length > 0);
 
-  res.status(200).render('_books', { books: books });
+  res.status(200).render('_books', { books: books, title: 'Books' });
 });
 
 router.get('/category/:category', async (req, res, next) => {
