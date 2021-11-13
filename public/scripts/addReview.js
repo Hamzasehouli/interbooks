@@ -19,7 +19,6 @@ export default Array.from(reviewStarBtn).forEach((review) => {
     );
 
     const data = await res.json();
-    console.log(data);
 
     if (res.ok) {
       location.reload();

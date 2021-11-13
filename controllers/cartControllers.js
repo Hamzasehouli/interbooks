@@ -79,7 +79,6 @@ exports.deleteAllCart = AsyncHandler(async (req, res, next) => {
       totalPrice: p.count * p.book_doc[0].price,
     };
   });
-  console.log(purchaseRaw);
 
   await Purchase.create(purchaseRaw);
 

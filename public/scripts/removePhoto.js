@@ -7,7 +7,7 @@ export default removePhotoBtn?.addEventListener('click', async (e) => {
   const res = await fetch('/api/v1/users/remove-photo', {
     method: 'POST',
   });
-  console.log(res);
+
   if (res.ok) {
     location.reload();
   }

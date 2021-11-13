@@ -6,6 +6,7 @@ const Wishlist = require('../models/wishlistModel');
 const Author = require('../models/authorModel');
 const Cart = require('../models/cartModel');
 const Review = require('../models/reviewModel');
+const Purchase = require('../models/purchaseModel');
 
 const router = express.Router();
 
@@ -86,6 +87,12 @@ router.get('/cart', authControllers.isLoggedIn, async (req, res, next) => {
 });
 router.get('/profile', authControllers.isLoggedIn, (req, res, next) => {
   res.status(200).render('_profile', { user: req.user });
+});
+
+router.get('/purchases', authControllers.isLoggedIn, async (req, res, next) => {
+  const purchases = await Purchase.find({ user: req.user.id }).populate('book');
+  
+  res.status(200).render('_purchase', { purchases });
 });
 
 router.get('/wishlist', authControllers.isLoggedIn, async (req, res, next) => {

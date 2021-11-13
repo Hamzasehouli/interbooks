@@ -1,0 +1,45 @@
+extends base
+
+block content
+    
+    
+    section.section-cart
+        .container
+            if purchases.length > 0
+                h2 Your purchases
+            else 
+                h2 You got no purchases yet.
+            .cart
+                if purchases.length > 0
+                    ul.cart__list
+                        each purchase in purchases
+                            li.cart__item
+                                figure.cart__item__img(style='margin-right:2rem;')
+                                    img(src=`${purchase.book.coverImage}` alt='')
+                                .cart__item__details
+                                    h3= `${purchase.book.name.includes('-') ? String(purchase.book.name).trim().replace(/-/g,' ').split(' ')[0][0].toUpperCase() + String(purchase.book.name).trim().replace(/-/g,' ').split(' ')[0].slice(1) + ' ' + String(purchase.book.name).trim().replace(/-/g,' ').split(' ').slice(1).join(' ') : purchase.book.name[0].toUpperCase() + purchase.book.name.slice(1)  }`
+                                    div
+                                        | by 
+                                        each author in purchase.book.author.map(a=> a.replace(/-/g, ' ').split(' ').map(b=> b[0].toUpperCase() + b.slice(1)).join(' '))
+                                            a.book__by.btn--standard(href=`/author/${author.toLowerCase().split(' ').join('-')}`)= author + ',  '
+                                    p(style='font-size: 1.4rem; font-weight: 700')= purchase.book.format 
+                                    p(style='color: var(--color-dark)') Ordered on: #{new Intl.DateTimeFormat('en-US',{year: 'numeric', month: 'short', day: 'numeric'}).format(purchase.added_at)}
+                                    p Quantiy: #{purchase.quantity}
+                                    p Paid: MAD #{purchase.totalPrice}
+                                    //- p(style='color: var(--color-secondary-dark)') Quantity: #{purchase.book.quant}
+                                    .cta
+                                        //- -let n=-1;
+                                        //- select#select.increase-quantity(data-user=user.id data-book=purchase.book.id name='quantity')
+                                        //-     while n < 30
+                                        //-         -n++
+                                        //-         option.book__option(value=n) Qty: #{n}
+                                        //- button.delete-cart(data-user=user.id data-book=purchase.book.id) Delete
+                                        
+                                //- .cart__item__price(style='color: var(--color-ok)') MAD #{purchase.book.price}
+                        
+                    //- .cart__checkout
+                    //-     p
+                    //-         | Total of items(#{items}):
+                    //-         span(style='font-weight: 700')  MAD #{price}
+                    //-     button.cart__checkout__btn.btn--cta#checkout(data-userid=user.id ) Proceed to checkout
+
