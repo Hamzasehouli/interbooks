@@ -27,7 +27,7 @@ exports.createSession = AsyncHandler(async (req, res, next) => {
     },
   ]);
 
-  // 1) get tour
+  // 1) get book
   const lineItems = resul.map((c) => {
     return {
       price_data: {

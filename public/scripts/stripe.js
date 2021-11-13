@@ -3,7 +3,7 @@ const stripe = new Stripe(
 );
 const checkoutBtn = document.getElementById('checkout');
 
-export default checkoutBtn?.addEventListener('click', async function (e) {
+export default checkoutBtn?.addEventListener('click', async function () {
   const res = await fetch(
     `/api/v1/purchase/checkout-session/${this.dataset.userid}`
   );
