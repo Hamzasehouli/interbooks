@@ -1,7 +1,15 @@
 module.exports = function (err, req, res, next) {
+  console.log(req.url);
   const env = process.env.NODE_ENV.trim();
   if (env === 'development') {
     if (err.isOperational) {
+      if (!req.url.startsWith('/api/v1/')) {
+        return res.status(err.statusCode).render('_error', {
+          statusCode: err.statusCode,
+          status: err.status,
+          error: err.message,
+        });
+      }
       return res.status(err.statusCode).json({
         statusCode: err.statusCode,
         status: err.status,
@@ -19,10 +27,17 @@ module.exports = function (err, req, res, next) {
     }
   } else if (env === 'production') {
     if (err.isOperational) {
+      if (!req.url.startsWith('/api/v1/')) {
+        return res.status(err.statusCode).render('_error', {
+          statusCode: err.statusCode,
+          status: err.status,
+          error: err.message,
+        });
+      }
       return res.status(500).json({
         statusCode: err.statusCode,
         status: err.status,
-        error: 'Something went wrong',
+        error: err.message,
       });
     } else {
       if (err.code === 11000) {
