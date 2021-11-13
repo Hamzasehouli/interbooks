@@ -40,6 +40,13 @@ module.exports = function (err, req, res, next) {
         error: err.message,
       });
     } else {
+      if (!req.url.startsWith('/api/v1/')) {
+        return res.status(err.statusCode).render('_error', {
+          statusCode: err.statusCode,
+          status: err.status,
+          error: 'Something went wrong',
+        });
+      }
       if (err.code === 11000) {
         return res.status(500).json({
           statusCode: err.statusCode,
